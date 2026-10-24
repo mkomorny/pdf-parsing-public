@@ -1,0 +1,48 @@
+HOW TO USE: pdf-parsing
+====================================
+
+PURPOSE
+  Exposes a 100% local, offline PDF batch extraction utility (extract_to_markdown.py)
+  that isolates invoices under invoices/ and translates PDFs into clean Markdown files
+  for LLM-native parsing and structured data compilation.
+
+CAPABILITIES
+  - Batch process directories of invoice and receipt PDFs completely offline.
+  - Automatically isolates PDF invoices into dedicated workspace subdirectories.
+  - Converts PDF text streams into clean, readable Markdown (.md) documents.
+  - Decouples raw document text extraction from schema formatting.
+  - Facilitates LLM-native JSON extraction without fragile regular expressions.
+
+USE CASES
+  - Processing batches of downloaded vendor invoices and utility bills.
+  - Extracting financial totals, line items, tax numbers, and payment due dates.
+  - Preparing raw PDF dumps for ingestion into SQLite or accounting spreadsheets.
+  - Offline invoice structuring without uploading sensitive financial data to cloud APIs.
+
+IDEAS
+  - Combine with dataset-builder to index all historical invoices into SQLite FTS5.
+  - Run as a pre-processing step for automated expense report generation.
+  - Pair with accounting reconciliation scripts to match bank statements.
+
+PROMPTS YOU CAN PASTE
+  /pdf-parsing
+
+  Parse all the invoices in the workspace and extract them to markdown.
+
+  Run the local PDF extraction tool on my invoice folder and compile parsed_invoices.json.
+
+  Extract merchant, date, amount, and invoice number from all recent PDFs offline.
+
+EXAMPLE FLOW
+  You:   /pdf-parsing Extract the invoices in my downloads.
+  Model: Running local batch extraction via extract_to_markdown.py...
+         - Isolated 4 invoices into workspace/invoices/
+         - Generated 4 markdown representations (.md)
+         - Extracted structured fields (Google, AWS, Stripe, GitHub)
+         - Saved structured records to parsed_invoices.json.
+
+DEFAULT GOALS IF YOU DON'T NAME ONE
+  1. Isolate PDFs into dedicated invoices/ directory
+  2. Batch extract text into clean .md files using pypdf
+  3. LLM-extract merchant, date, amount, and invoice number
+  4. Output consolidated parsed_invoices.json
